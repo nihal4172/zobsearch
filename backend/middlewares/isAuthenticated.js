@@ -5,21 +5,27 @@ const isAuthenticated = async (req, res, next) => {
         const token = req.cookies.token;
         if (!token) {
             return res.status(401).json({
-                message: "User not authenticated",
+                message: "Please login to access this resource",
                 success: false,
-            })
+            });
         }
-        const decode = await jwt.verify(token, process.env.SECRET_KEY);
-        if(!decode){
+        
+        try {
+            const decoded = jwt.verify(token, process.env.JWT_SECRET);
+            req.id = decoded.userId;
+            next();
+        } catch (error) {
             return res.status(401).json({
-                message:"Invalid token",
-                success:false
-            })
-        };
-        req.id = decode.userId;
-        next();
+                message: "Invalid or expired token. Please login again",
+                success: false
+            });
+        }
     } catch (error) {
-        console.log(error);
+        return res.status(500).json({
+            message: "Internal server error",
+            success: false
+        });
     }
-}
+};
+
 export default isAuthenticated;

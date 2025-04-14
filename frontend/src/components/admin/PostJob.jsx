@@ -117,23 +117,35 @@ const PostJob = () => {
                         </div>
                         <div>
                             <Label>Job Type</Label>
-                            <Input
-                                type="text"
-                                name="jobType"
-                                value={input.jobType}
-                                onChange={changeEventHandler}
-                                className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1"
-                            />
+                            <Select onValueChange={(value) => setInput({ ...input, jobType: value })}>
+                                <SelectTrigger className="w-full">
+                                    <SelectValue placeholder="Select job type" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectGroup>
+                                        <SelectItem value="full-time">Full Time</SelectItem>
+                                        <SelectItem value="part-time">Part Time</SelectItem>
+                                        <SelectItem value="contract">Contract</SelectItem>
+                                        <SelectItem value="internship">Internship</SelectItem>
+                                    </SelectGroup>
+                                </SelectContent>
+                            </Select>
                         </div>
                         <div>
                             <Label>Experience Level</Label>
-                            <Input
-                                type="text"
-                                name="experience"
-                                value={input.experience}
-                                onChange={changeEventHandler}
-                                className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1"
-                            />
+                            <Select onValueChange={(value) => setInput({ ...input, experience: value })}>
+                                <SelectTrigger className="w-full">
+                                    <SelectValue placeholder="Select experience level" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectGroup>
+                                        <SelectItem value="entry">Entry Level</SelectItem>
+                                        <SelectItem value="mid">Mid Level</SelectItem>
+                                        <SelectItem value="senior">Senior Level</SelectItem>
+                                        <SelectItem value="lead">Lead Level</SelectItem>
+                                    </SelectGroup>
+                                </SelectContent>
+                            </Select>
                         </div>
                         <div>
                             <Label>No of Postion</Label>
